@@ -6,5 +6,6 @@
 
 import { createApp } from 'vue'
 import Example from './Example.vue'
+import modal from '../../src/components/QuestionTypes/Modal.vue'
 
 createApp(Example).mount('#app')

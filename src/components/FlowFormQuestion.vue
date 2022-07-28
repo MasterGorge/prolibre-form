@@ -1,6 +1,9 @@
 // Single question template and logic
 
 <template>
+<head>
+</head>
+
   <div class="vff-animate q-form" v-bind:class="mainClasses" ref="qanimate">
     <div class="q-inner">
       <div v-bind:class="{'f-section-wrap': question.type === QuestionType.SectionBreak}">
@@ -11,6 +14,7 @@
             <span class="fh2" v-if="question.type === QuestionType.SectionBreak">{{ question.title }}</span>
             <span class="f-text" v-else>
               {{ question.title }}&nbsp;
+
               <!-- Required questions are marked by an asterisk (*) -->
               <span class="f-required" v-if="question.required" v-bind:aria-label="language.ariaRequired" role="note"><span aria-hidden="true">*</span></span>
 
@@ -25,18 +29,17 @@
                   v-bind:disabled="disabled"
                   v-on:next="onEnter"
                 />
-              </span>
+                </span>
             </span>
           </template>
 
-          <span class="f-sub" v-if="showHelperText">
-            <span v-if="question.subtitle">{{ question.subtitle }}</span>
+<button @click="isOpen = true" v-if="showHelperText">Show Modal</button>
+<Modal :open="isOpen" @close="isOpen = !isOpen">
+    <p class="helptext">
+      {{this.question.helpText}}
+    </p>
+  </Modal>
 
-            <span class="f-help" v-if="question.type === QuestionType.LongText && !isMobile" v-html="question.helpText || language.formatString(language.longTextHelpText)"></span>
-
-            <span class="f-help" v-if="question.type === QuestionType.MultipleChoice && question.multiple">{{ question.helpText || language.multipleChoiceHelpText }}</span>
-            <span class="f-help" v-else-if="question.type === QuestionType.MultipleChoice">{{ question.helpText || language.multipleChoiceHelpTextSingle }}</span>
-          </span>
 
           <div v-if="!question.inline" class="f-answer f-full-width">
             <component
@@ -116,6 +119,8 @@
   import FlowFormMatrixType from './QuestionTypes/MatrixType.vue'
   import { IsMobile } from '../mixins/IsMobile'
   
+  import Modal from "../components/QuestionTypes/Modal.vue";
+  import { ref } from "vue";
 
   export default {
     name: 'FlowFormQuestion',
@@ -134,8 +139,14 @@
       FlowFormTextType,
       FlowFormFileType,
       FlowFormUrlType,
-      FlowFormMatrixType
+      FlowFormMatrixType,
+      Modal
     },
+    setup() {
+    const isOpen = ref(false);
+
+    return { isOpen };
+  },
 
     props: {
       question: QuestionModel,
@@ -349,6 +360,17 @@
 
         return false
       },
+      showQuestionModel() {
+        if (this.question.subtitle) {
+          return true
+        }
+
+        if (this.question.type === QuestionType.LongText || this.question.type === QuestionType.MultipleChoice || this.question.type === QuestionType.MultipleChoice) {
+          return this.question.QuestionModel
+        }
+
+        return false
+      },
 
       errorMessage() {
         const q = this.$refs.questionComponent
@@ -362,3 +384,87 @@
     }
   }
 </script>
+<style scoped >
+.helptext{
+  font-size: 20px;
+}
+/*
+.wrapper a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px;
+  background-color: rgb(12, 199, 65);
+  border-radius: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  border-radius: 50px;
+}
+.wrapper a:hover {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px;
+  background-color: rgb(5, 138, 43);
+  border-radius: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 50px;
+}
+
+.modal {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .4s;
+}
+
+.modal:target {
+  visibility: visible;
+  opacity: 1;
+  
+}
+
+.modal__content {
+  border-radius: 4px;
+  position: relative;
+  width: 800px;
+  height: auto;
+  max-width: 90%;
+  background: #fff;
+  padding: 1em 2em;
+  
+}
+
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #585858;
+  text-decoration: none;
+}
+
+.hidden {
+  visibility: hidden;
+  background: pink;
+  border: 10px dotted teal;
+  padding: 10px;
+}
+
+.hidden:hover {
+  visibility: visible;
+  background: pink;
+  border: 10px dotted teal;
+  padding: 10px;
+}*/
+
+</style>

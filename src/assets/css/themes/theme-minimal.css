@@ -13,7 +13,7 @@
   --vff-main-text-color: #181818;
   --vff-secondary-text-color: #999;
   --vff-tertiary-text-color: #f1f1f1;
-  --vff-main-accent-color: #0DBC79;
+  --vff-main-accent-color: #520404;
   --vff-secondary-accent-color: #BBEBD5;
 }
 
@@ -243,7 +243,7 @@ header.vff-header svg.f-logo {
 }
 
 .vff .text-success {
-  color: #4CAF50;
+  color: red;
 }
 
 /* text-muted */
@@ -264,7 +264,7 @@ header.vff-header svg.f-logo {
     --vff-main-text-color: #fff;
     --vff-secondary-text-color: #AEB6BF;
     --vff-tertiary-text-color: #41464F;
-    --vff-main-accent-color: #41B883;
+    --vff-main-accent-color: red;
     --vff-secondary-accent-color: #A0DBC1;
   }
 

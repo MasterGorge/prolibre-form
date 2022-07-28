@@ -10,12 +10,12 @@
 
 :root {
   --vff-bg-color: #F9F6FB;
-  --vff-main-text-color: #181818;
-  --vff-secondary-text-color: #7f8c8d;
+  --vff-main-text-color: #181818 /*rgb(183, 182, 182)*/;
+  --vff-secondary-text-color: /*#7f8c8d*/white;
   --vff-tertiary-text-color: #f1f1f1;
   --vff-main-accent-color: #27ae60;
-  --vff-secondary-accent-color: #2ecc71;
-  --vff-tertiary-accent-color: #8e44ad;
+  --vff-secondary-accent-color: rgb(36, 128, 33);
+  --vff-tertiary-accent-color: /*#8e44ad*/ rgb(154, 11, 11);
   --vff-header-color: var(--vff-tertiary-accent-color);
   --vff-header-border-color: transparent;
   --vff-button-color: var(--vff-main-accent-color);
@@ -26,9 +26,14 @@
   --vff-form-input-color: var(--vff-main-text-color);
   --vff-field-key-color: var(--vff-main-accent-color);
   --vff-arrow-color: var(--vff-main-text-color);
-  --vff-arrow-hover-color: rgba(0,0,0,0.07);
-  --vff-footer-color: rgba(249,246,251,0.75);
+  --vff-arrow-hover-color: rgba(0,0,0,0.07) ;
+  --vff-footer-color: /*rgba(249,246,251,0.75)*/ rgb(180, 18, 18);
   --vff-progress-bar-color: var(--vff-main-text-color);
+}
+
+.title{
+  color: white;
+  text-shadow:0 4px 0 #000000, 0 -4px 0 #69080b;
 }
 
 .vff,
@@ -42,14 +47,12 @@
   font-family: 'Poppins', sans-serif;
 }
 
-body {
-  /* override if needed when using not-standalone option */
-  margin: 0;
-  background-color: var(--vff-bg-color);
-}
+
 
 .vff {
   color: var(--vff-main-text-color);
+  /*text-shadow: 2px 2px 2px #6b6565*/;
+  
 }
 
 .vff.vff-not-standalone {
@@ -61,6 +64,8 @@ header.vff-header {
   background-color: var(--vff-header-color);
   border-bottom: 2px solid var(--vff-header-border-color);
   padding-bottom: .6em;
+  border-bottom-left-radius: 100px;
+  box-shadow: 5px 5px 5px #000000;
 }
 
 header.vff-header svg.f-logo {
@@ -126,6 +131,10 @@ header.vff-header svg.f-logo {
 .vff ul.f-radios li {
   border: 1px solid var(--vff-secondary-form-bg-color);
   background-color: var(--vff-main-form-bg-color);
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px #000000;
+
 }
 
 .vff ul.f-radios li.f-selected,
@@ -158,27 +167,28 @@ header.vff-header svg.f-logo {
 
 /* field matrix */
 .vff .f-matrix-table {
-  border-collapse: separate;
-  border-spacing: 0 .6em;
+  border-spacing: auto;
+  height: 50px;
+  width: 50px;
 }
 
-.vff .f-matrix-table thead th {
-  padding-bottom: 0;
-}
+/*.vff .f-matrix-table thead th {
+  padding-bottom: auto;
+}*/
 
 .vff .f-matrix-table td {
-  border: 1px solid var(--vff-secondary-form-bg-color);
+  /*border: 1px solid var(--vff-secondary-form-bg-color);*/
   border-right:hidden;
   border-left: hidden;
 }
 
-.vff .f-matrix-table td:first-child {
+/*.vff .f-matrix-table td:first-child {
   border-left: 1px solid var(--vff-secondary-form-bg-color);
-}
+}*/
 
-.vff .f-matrix-table td:last-child {
+/*.vff .f-matrix-table td:last-child {
   border-right: 1px solid var(--vff-secondary-form-bg-color);
-}
+}*/
 
 .vff .f-matrix-table thead td:first-child {
   border: none;
@@ -193,7 +203,7 @@ header.vff-header svg.f-logo {
   color: var(--vff-secondary-form-bg-color);
 }
 
-/* matrix scrollbar */
+/* matrix scrollbar 
 .vff .f-matrix-wrap::-webkit-scrollbar {
   height: 10px;
 }
@@ -204,12 +214,13 @@ header.vff-header svg.f-logo {
 
 .vff .f-matrix-wrap::-webkit-scrollbar-thumb {
   background-color: var(--vff-secondary-form-bg-color);
-}
+}*/
 
 /* buttons */
 .vff .o-btn-action {
   color: var(--vff-button-text-color);
   background-color: var(--vff-button-color);
+  border-radius: 20px;
 }
 
 .vff .o-btn-action:hover,
@@ -221,6 +232,8 @@ header.vff-header svg.f-logo {
 /* footer */
 .vff-footer .footer-inner-wrap {
   background-color: var(--vff-footer-color);
+  border-top-right-radius: 100px;
+  box-shadow: 5px 5px 5px #000000;
 }
 
 @media screen and (max-width:479px) {
@@ -318,4 +331,37 @@ header.vff-header svg.f-logo {
   .vff .f-key {
     font-weight: 400;
   }
+}
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+/*Animation*/
+
+body{
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    background-size: 400% 400%;
+    position: relative;
+    animation-name: change;
+    animation: change 7s ease-in-out infinite;
+}
+
+
+
+@keyframes change{
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
 }

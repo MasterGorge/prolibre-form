@@ -98,6 +98,7 @@ export default class QuestionModel {
     // Make sure the options variable is an object
     options = options || {}
 
+    this.visibleIf = null
     this.id = null
     this.answer = null
     this.answered = false
@@ -180,6 +181,22 @@ export default class QuestionModel {
 
     return nextId
   }
+
+  
+
+  /*getVisibleIfId() {
+    let visibleIfId = null
+
+    if (typeof this.visibleIf === 'function') {
+      visibleIfId = this.visibleIf.call(this)
+    } else if (this.visibleIf[this.answer]) {
+      visibleIfId = this.visibleIf[this.answer]
+    } else if (this.visibleIf['_other']) {
+      visibleIfId = this.visibleIf['_other']
+    }
+
+    return visibleIfId
+  }*/
 
   setAnswer(answer) {
     if (this.type === QuestionType.Number && answer !== '' && !isNaN(+answer)) {

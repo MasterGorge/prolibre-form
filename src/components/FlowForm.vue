@@ -133,6 +133,9 @@
   */
 
   import FlowFormQuestion from './FlowFormQuestion.vue'
+  import form1 from './questionnaire/form1.vue'
+  import form2 from './questionnaire/form2.vue'
+  import form3 from './questionnaire/form3.vue'
   import QuestionModel, { ChoiceOption, LinkOption, QuestionType } from '../models/QuestionModel'
   import LanguageModel from '../models/LanguageModel'
   import { IsMobile } from '../mixins/IsMobile'
